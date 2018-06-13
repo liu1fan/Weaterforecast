@@ -136,6 +136,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         final String address = "http://wthrcdn.etouch.cn/WeatherApi?citykey=" + cityCode;
 
         Log.d("myWeather", address);
+//        开启一个子线程，在子线程中更新天气
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -168,6 +169,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                         mHandler.sendMessage(msg);
 
                     }
+
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -275,6 +277,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
         humidityTv.setText("湿度："+todayWeather.getShidu());
         pmDataTv.setText(todayWeather.getPm25());
         pmQualityTv.setText(todayWeather.getQuality());
+//        更新图片
+        pmImg.setImageResource(getpmImage(todayWeather.getQuality()));
+        weatherImg.setImageResource(getImage(todayWeather.getType()));
+
         weekTv.setText(todayWeather.getDate());
         temperatureTv.setText(todayWeather.getHigh()+"~"+todayWeather.getLow());
         climateTv.setText(todayWeather.getType());
@@ -284,4 +290,55 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
 
+    private int getImage(String type) {
+        int imagetype=0;
+        switch(type) {
+            case "阴" : imagetype=R.drawable.biz_plugin_weather_yin;
+                break;
+            case "暴雪" : imagetype=R.drawable.biz_plugin_weather_baoxue;
+                break;
+            case "晴" : imagetype=R.drawable.biz_plugin_weather_qing;
+                break;
+            case "暴雨" : imagetype=R.drawable.biz_plugin_weather_baoyu;
+                break;
+            case "大暴雨" : imagetype=R.drawable.biz_plugin_weather_dabaoyu;
+                break;
+            case "大雪" : imagetype=R.drawable.biz_plugin_weather_daxue;
+                break;
+            case "大雨" : imagetype=R.drawable.biz_plugin_weather_dayu;
+                break;
+            case "多云" : imagetype=R.drawable.biz_plugin_weather_duoyun;
+                break;
+            case "雷阵雨冰雹" : imagetype=R.drawable.biz_plugin_weather_leizhenyubingbao;
+                break;
+            case "雷阵雨" : imagetype=R.drawable.biz_plugin_weather_leizhenyu;
+                break;
+            default:
+                imagetype=R.drawable.biz_plugin_weather_qing;
+        }
+        return imagetype;
+    }
+//    空气质量图标的显示的函数
+    private int getpmImage(String pm) {
+        System.out.println(pm);
+        int pmtype=0;
+        switch(pm) {
+            case "重度污染" : pmtype=R.drawable.biz_plugin_weather_201_300;
+                break;
+            case "中度污染" : pmtype=R.drawable.biz_plugin_weather_151_200;
+                break;
+            case "轻度污染" : pmtype=R.drawable.biz_plugin_weather_101_150;
+                break;
+            case "?还有什么等级" : pmtype=R.drawable.biz_plugin_weather_51_100;
+                break;
+            case "良" : pmtype=R.drawable.biz_plugin_weather_0_50;
+                break;
+            default:
+                pmtype=R.drawable.biz_plugin_weather_0_50;
+                System.out.println("pmnull  打印的default");
+                break;
+        }
+
+        return pmtype;
+    }
 }
