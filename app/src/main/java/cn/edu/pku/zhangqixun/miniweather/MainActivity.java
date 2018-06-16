@@ -270,24 +270,41 @@ public class MainActivity extends Activity implements View.OnClickListener {
         return todayWeather;
     }
 
-    void updateTodayWeather(TodayWeather todayWeather){
-        city_name_Tv.setText(todayWeather.getCity()+"天气");
-        cityTv.setText(todayWeather.getCity());
-        timeTv.setText(todayWeather.getUpdatetime()+ "发布");
-        humidityTv.setText("湿度："+todayWeather.getShidu());
-        pmDataTv.setText(todayWeather.getPm25());
-        pmQualityTv.setText(todayWeather.getQuality());
-//        更新图片
-        pmImg.setImageResource(getpmImage(todayWeather.getQuality()));
-        weatherImg.setImageResource(getImage(todayWeather.getType()));
-
-        weekTv.setText(todayWeather.getDate());
-        temperatureTv.setText(todayWeather.getHigh()+"~"+todayWeather.getLow());
-        climateTv.setText(todayWeather.getType());
-        windTv.setText("风力:"+todayWeather.getFengli());
-        Toast.makeText(MainActivity.this,"更新成功！",Toast.LENGTH_SHORT).show();
-
-    }
+//    void updateTodayWeather(TodayWeather todayWeather){
+//        city_name_Tv.setText(todayWeather.getCity()+"天气");
+//        cityTv.setText(todayWeather.getCity());
+//        timeTv.setText(todayWeather.getUpdatetime()+ "发布");
+//        humidityTv.setText("湿度："+todayWeather.getShidu());
+//        pmDataTv.setText(todayWeather.getPm25());
+//        pmQualityTv.setText(todayWeather.getQuality());
+////        更新图片
+//        pmImg.setImageResource(getpmImage(todayWeather.getQuality()));
+//        weatherImg.setImageResource(getImage(todayWeather.getType()));
+//
+//        weekTv.setText(todayWeather.getDate());
+//        temperatureTv.setText(todayWeather.getHigh()+"~"+todayWeather.getLow());
+//        climateTv.setText(todayWeather.getType());
+//        windTv.setText("风力:"+todayWeather.getFengli());
+//        Toast.makeText(MainActivity.this,"更新成功！",Toast.LENGTH_SHORT).show();
+//
+//    }
+void updateTodayWeather (TodayWeather todayWeather){
+    //Log.d("myapp3", todayWeather.toString());
+    city_name_Tv.setText(todayWeather.getCity()+"天气");
+    cityTv.setText(todayWeather.getCity());
+    timeTv.setText(todayWeather.getUpdatetime() + "发布");
+    humidityTv.setText("湿度:" + todayWeather.getShidu());
+    weekTv.setText(todayWeather.getDate());
+    pmDataTv.setText(todayWeather.getPm25());
+    pmQualityTv.setText(todayWeather.getQuality());
+    pmImg.setImageResource(getpmImage(todayWeather.getQuality()));
+    temperatureTv.setText(todayWeather.getLow() + "~" + todayWeather.getHigh());
+    climateTv.setText(todayWeather.getType());
+    windTv.setText("风力:" + todayWeather.getFengli());
+    weatherImg.setImageResource(getImage(todayWeather.getType()));
+    Toast.makeText(MainActivity.this, "更新成功！", Toast.LENGTH_LONG).show();
+    //Log.d("到底更新几次!!!!!!!!!!!!", todayWeather.toString());
+}
 
 
     private int getImage(String type) {
